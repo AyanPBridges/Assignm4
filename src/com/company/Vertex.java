@@ -2,10 +2,10 @@ package com.company;
 
 public class Vertex<V> {
     private V data;
-    private Map<Vertex<V>, Double> adjacentVertices;
+    //private Map<Vertex<V>, Double> adjacentVertices;
 
     public void addAdjacentVertex(Vertex<V> destination, double weight){
-        adjacentVertices.put(destination, weight);
+        //adjacentVertices.put(destination, weight);
     }
 
 }
