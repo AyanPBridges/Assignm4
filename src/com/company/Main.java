@@ -11,8 +11,27 @@ public class Main {
 
         System.out.println("Dijkstra:");
         Search<String> djk = new DijkstraSearch<>(graph, "Almaty");
+        //DijkstraSearch dijkstra = new DijkstraSearch(graph);
         outputPath(djk, "Kyzylorda");
 
+        MyGraph ngraph = new MyGraph(6);
+        ngraph.addEdge(0, 1);
+        ngraph.addEdge(0, 3);
+        ngraph.addEdge(0, 4);
+        ngraph.addEdge(4, 5);
+        ngraph.addEdge(3, 5);
+        ngraph.addEdge(1, 2);
+        ngraph.addEdge(1, 0);
+        ngraph.addEdge(2, 1);
+        ngraph.addEdge(4, 1);
+        ngraph.addEdge(3, 1);
+        ngraph.addEdge(5, 4);
+        ngraph.addEdge(5, 3);
+
+        System.out.println(" ");
+        System.out.print("The Breadth First Traversal of the graph is as follows : ");
+
+        ngraph.BFS(0);
     }
 
     public static void outputPath(Search<String> search, String key) {

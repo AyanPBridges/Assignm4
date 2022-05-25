@@ -1,38 +1,48 @@
 package com.company;
 import java.util.*;
+import java.util.List;
 
-
-public class MyGraph<Vertex> {
-    private final boolean undirected;
+class MyGraph {
+    private int V;
     private Map<Vertex, List<Vertex>> map = new HashMap<>();
+    private LinkedList<Integer> adj[];
+    private Queue<Integer> queue;
 
-    public MyGraph() {
-        this.undirected = true;
+
+    MyGraph(int v) {
+        V = v;
+        adj = new LinkedList[v];
+        for (int i = 0; i < v; i++) {
+            adj[i] = new LinkedList<>();
+        }
+        queue = new LinkedList<Integer>();
     }
 
-    public MyGraph(boolean undirected) {
-        this.undirected = undirected;
+
+    void addEdge(int v, int w) {
+        adj[v].add(w);
     }
 
-    public void addVertex(Vertex v) {
-        map.put(v, new LinkedList<>());
-    }
+    void BFS(int n) {
 
-    public void addEdge(Vertex source, Vertex dest) {
-        if (!hasVertex(source))
-            addVertex(source);
+        boolean nodes[] = new boolean[V];
+        int a = 0;
 
-        if (!hasVertex(dest))
-            addVertex(dest);
+        nodes[n] = true;
+        queue.add(n);
 
-        if (hasEdge(source, dest)
-                || source.equals(dest))
-            return; // reject parallels & self-loops
+        while (queue.size() != 0) {
+            n = queue.poll();
+            System.out.print(n + " ");
 
-        map.get(source).add(dest);
-
-        if (undirected)
-            map.get(dest).add(source);
+            for (int i = 0; i < adj[n].size(); i++) {
+                a = adj[n].get(i);
+                if (!nodes[a]) {
+                    nodes[a] = true;
+                    queue.add(a);
+                }
+            }
+        }
     }
 
     public int getVerticesCount() {
@@ -44,26 +54,6 @@ public class MyGraph<Vertex> {
         for (Vertex v : map.keySet()) {
             count += map.get(v).size();
         }
-
-        if (undirected)
-            count /= 2;
-
         return count;
-    }
-
-
-    public boolean hasVertex(Vertex v) {
-        return map.containsKey(v);
-    }
-
-    public boolean hasEdge(Vertex source, Vertex dest) {
-        if (!hasVertex(source)) return false;
-        return map.get(source).contains(dest);
-    }
-
-    public Iterable<Vertex> adjacencyList(Vertex v) {
-        if (!hasVertex(v)) return null;
-
-        return map.get(v);
     }
 }

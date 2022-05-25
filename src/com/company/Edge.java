@@ -17,6 +17,9 @@ public class Edge<Vertex> {
         this.dest = dest;
     }
 
+    public Vertex getDestination() {
+        return dest;
+    }
     public void setSource(Vertex source) {
         this.source = source;
     }
